@@ -13,6 +13,11 @@ TO DO:
 - Hunt
 - Hunger
 
+## Engine:
+- Screen + widgets
+- fps + gameloop
+- debug mode
+
 ## QoL:
 - add actual frame sleeping in the engine. can probably make a gameloop function
 - sprites file
@@ -41,8 +46,8 @@ var cursor = NewCursor('X', 1, 1)
 
 // Declare const vars
 const (
-    SetFPS      = 16
-    simIdleRate = 7
+    SetFPS      = 30
+    simIdleRate = 100
 )
 
 
@@ -68,8 +73,21 @@ func main() {
     go keyPress()    
 
     // Game loop
-    for {
+    ticker := time.NewTicker(time.Second / time.Duration(SetFPS))
+    defer ticker.Stop()
+
+    frames := 0
+    lastFPS := time.Now()
+    currentFPS := 0
+    for range ticker.C {
         // Input
+        frames++
+        
+        if time.Since(lastFPS) >= time.Second {
+            currentFPS = frames
+            frames = 0
+            lastFPS = time.Now()
+        }
 
         // Update
         s_Idle(&world.Components)   // Idle Sim
@@ -79,12 +97,16 @@ func main() {
         r.Clear()                   // Clear Screen
         s_Draw(&world.Components)   // Draw entities
         cursor.Draw()               // Draw cursor
+        r.Move(1, 0)
+        r.Text("Debug:")
+        r.Move(1, 1)
+        r.Text("FPS: %d", currentFPS)
 
         // Flush all rendering
         r.Flush()
 
         // Sleep
-        time.Sleep(SetFPS * time.Millisecond) // Remove later
+        //time.Sleep(SetFPS * time.Millisecond) // Remove later
     }
 
 }

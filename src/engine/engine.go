@@ -54,8 +54,8 @@ func (r *Renderer) ShowCursor() {
 }
 
 // Write Text
-func (r *Renderer) Text(input string) {
-    fmt.Fprint(r.w, input)
+func (r *Renderer) Text(input string, args ...any) {
+    fmt.Fprintf(r.w, input, args...)
 }
 
 

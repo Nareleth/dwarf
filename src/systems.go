@@ -42,7 +42,7 @@ func s_Idle(c *Components) {
     for _, actor := range c.Velocity {
         switch rand.IntN(simIdleRate) {
             case 0:
-                 actor.DX = 0
+                actor.DX = 0
                 actor.DY = -1
             case 1:
                 actor.DX = 0
