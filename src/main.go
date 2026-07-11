@@ -4,15 +4,28 @@ package main
 TO DO:
 ## Right now:
 
-- import game/engine is the name of projectmodule/package - both need to change later
+
+## Features:
+- Map
+- Trees
+- Creatures
+- Build
+- Hunt
+- Hunger
+
+## QoL:
 - add actual frame sleeping in the engine. can probably make a gameloop function
-- proably need to make a gamestate to track cursor and ui shit in the future
+- sprites file
+
+## UI:
 - declare a screen.
 - adjust draw positions relative to the parent widget
 - clamp cursor within screen
 - draw screen border
-- ui
-- sprites
+
+## Cleanup:
+- proably need to make a gamestate to track cursor and ui shit in the future
+- import game/engine is the name of projectmodule/package - both need to change later
 */
 
 import (
@@ -26,6 +39,11 @@ var r = engine.NewRenderer()
 // THIS SHOULDNT BE GLOBAL
 var cursor = NewCursor('X', 1, 1)
 
+// Declare const vars
+const (
+    SetFPS      = 16
+    simIdleRate = 7
+)
 
 
 func main() {
@@ -66,7 +84,7 @@ func main() {
         r.Flush()
 
         // Sleep
-        time.Sleep(16 * time.Millisecond) // Remove later
+        time.Sleep(SetFPS * time.Millisecond) // Remove later
     }
 
 }
