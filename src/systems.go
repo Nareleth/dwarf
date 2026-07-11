@@ -1,5 +1,9 @@
 package main
 
+import (
+    "math/rand/v2"
+)
+
 
 // Movement System
 // Check the range of all entities with a velocity.
@@ -24,6 +28,37 @@ func s_Draw(c *Components) {
             r.Move(pos.X, pos.Y)
             r.Text(string(sprite.Char))
 
+        }
+    }
+}
+
+
+/*
+    Idle System:
+    Simulate random wandering for entities.
+    Iterate through every entity and roll a number. That number determines if their velocity changes or not.
+*/
+func s_Idle(c *Components) {
+    for _, actor := range c.Velocity {
+            path := rand.IntN(7)
+
+            switch path {
+                case 0:
+                    actor.DX = 0
+                    actor.DY = -1
+                case 1:
+                    actor.DX = 0
+                    actor.DY = 1
+                case 2:
+                    actor.DX = -1
+                    actor.DY = 0
+                case 3:
+                    actor.DX = 1
+                    actor.DY = 0
+                default:
+                    actor.DX = 0
+                    actor.DY = 0
+                    
         }
     }
 }

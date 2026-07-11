@@ -3,7 +3,6 @@ package main
 /*
 TO DO:
 ## Right now:
-- Idle movement simulation
 
 - import game/engine is the name of projectmodule/package - both need to change later
 - add actual frame sleeping in the engine. can probably make a gameloop function
@@ -55,7 +54,8 @@ func main() {
         // Input
 
         // Update
-        s_Move(&world.Components)
+        s_Idle(&world.Components)   // Idle Sim
+        s_Move(&world.Components)   // Move entities
 
         // Draw
         r.Clear()                   // Clear Screen
