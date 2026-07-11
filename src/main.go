@@ -3,20 +3,17 @@ package main
 /*
 TO DO:
 ## Right now:
-- make actors (using ECS method)
-
+- Idle movement simulation
 
 - import game/engine is the name of projectmodule/package - both need to change later
 - add actual frame sleeping in the engine. can probably make a gameloop function
 - proably need to make a gamestate to track cursor and ui shit in the future
 - declare a screen.
+- adjust draw positions relative to the parent widget
 - clamp cursor within screen
 - draw screen border
 - ui
-- world struct
-- actors
-- ECS
-
+- sprites
 */
 
 import (
