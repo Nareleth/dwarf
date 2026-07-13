@@ -1,6 +1,7 @@
 # TO DO:
 ## Right now:
-- clamp cursor to panel bounds
+- draw cursor from panel coords (draw)
+- clamp cursor to panel bounds (move)
 - camera
 - adjust map drawing to use camera logic
 - camera follows cursor
@@ -40,6 +41,10 @@
     - nested panel?
 - console tab for showing debug info or running "console commands"
 - tileset
+
+## QOL:
+- create a gamestate for holding cursor info. so cursor can stop being global
+- also use that to change how the key input routine works
 
 ## Cleanup:
 - proably need to make a gamestate to track cursor and ui shit in the future

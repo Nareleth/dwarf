@@ -9,7 +9,7 @@ import (
 // Declare global rendering
 var r = engine.NewRenderer()
 
-// THIS SHOULDNT BE GLOBAL
+// DONT LET THIS BE GLOBAL!
 var cursor = NewCursor('X', 1, 1)
 
 // Declare const vars
