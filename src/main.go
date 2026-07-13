@@ -1,49 +1,10 @@
 package main
 
-/*
-TO DO:
-## Right now:
-- panel rendering
-- camera (follows cursor)
-- map
-- trees
-
-## Features:
-- Map
-- Trees
-- Creatures
-- Build
-- Hunt
-- Hunger
-
-## Engine:
-- panel:
-    - border style
-    - corners
-- get terminal size
-- Screen + widgets
-- fps + gameloop
-- debug mode
-
-## QoL:
-- add actual frame sleeping in the engine. can probably make a gameloop function
-- sprites file
-
-## UI:
-- declare a screen.
-- adjust draw positions relative to the parent widget
-- clamp cursor within screen
-- draw screen border
-
-## Cleanup:
-- proably need to make a gamestate to track cursor and ui shit in the future
-- import game/engine is the name of projectmodule/package - both need to change later
-*/
-
 import (
     "game/engine"
     "time"
 )
+
 
 // Declare global rendering
 var r = engine.NewRenderer()
@@ -74,6 +35,7 @@ func main() {
         Width:  100,
         Height: 50,
     }
+
     panelCanvas.Style = engine.Light
 
     // New Cursor
