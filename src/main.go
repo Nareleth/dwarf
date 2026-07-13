@@ -3,7 +3,10 @@ package main
 /*
 TO DO:
 ## Right now:
-
+- panel rendering
+- camera (follows cursor)
+- map
+- trees
 
 ## Features:
 - Map
@@ -14,6 +17,10 @@ TO DO:
 - Hunger
 
 ## Engine:
+- panel:
+    - border style
+    - corners
+- get terminal size
 - Screen + widgets
 - fps + gameloop
 - debug mode
@@ -60,6 +67,15 @@ func main() {
     r.HideCursor()
     defer r.ShowCursor()
 
+    // Drawing Panels
+    panelCanvas := engine.Panel{
+        X:      1,
+        Y:      3,
+        Width:  100,
+        Height: 50,
+    }
+    panelCanvas.Style = engine.Light
+
     // New Cursor
 
     // New World
@@ -95,6 +111,7 @@ func main() {
 
         // Draw
         r.Clear()                   // Clear Screen
+        panelCanvas.DrawBorder(r)
         s_Draw(&world.Components)   // Draw entities
         cursor.Draw()               // Draw cursor
         r.Move(1, 0)
