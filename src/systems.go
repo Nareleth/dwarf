@@ -2,6 +2,7 @@ package main
 
 import (
     "math/rand/v2"
+    "game/engine"
 )
 
 
@@ -22,10 +23,20 @@ func s_Move(c *Components) {
     Check the range of all entities with a sprite. Assign key and value pair.
     If the entity has a position (needed to draw) then use the render engine to position cursor and draw.
 */
-func s_Draw(c *Components) {
+func s_Draw(c *Components, p *engine.Panel, camera *Camera) {
     for id, sprite := range c.Sprite {
         if pos, ok := c.Position[id]; ok {
-            r.Move(pos.X, pos.Y)
+
+            // Render only entities in view
+            localX := pos.X - camera.X
+            localY := pos.Y - camera.Y
+
+            if localX <= 0 || localX >= p.Width || localY <= 0 || localY >= p.Height { continue }            
+
+            
+            screenX := p.X + 1 + localX
+            screenY := p.Y + 1 + localY
+            r.Move(screenX, screenY)
             r.Text(string(sprite.Char))
 
         }

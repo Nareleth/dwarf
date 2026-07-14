@@ -18,6 +18,12 @@ var (
 )
 
 
+// Camera struct
+type Camera struct {
+    X, Y int
+}
+
+
 // Tilemap struct
 type TileMap struct {
     Width, Height   int
@@ -45,21 +51,21 @@ func GenerateTileMap(width, height int) *TileMap {
 }
 
 // Draw tilemap
-func (m *TileMap) Draw(p engine.Panel) {
+func (m *TileMap) Draw(p *engine.Panel, camera *Camera) {
     // Establish drawing area viewport
-    /* -- may not be necessary if i use drawcell func from engine
+    // -- may not be necessary if i use drawcell func from engine
     viewportWidth   := p.Width  -1
     viewportHeight  := p.Height -1
-    */
 
     // Iterate through the tilemap
     for y := range m.Height {
         for x := range m.Width {
             // Snap to camera
-            viewportX := x - 0
-            viewportY := y - 0
+            viewportX := x - camera.X
+            viewportY := y - camera.Y
 
             // Viewbound strapping (render only in view)
+            if viewportX <= p.X || viewportX >= viewportWidth || viewportY <= p.Y || viewportY >= viewportHeight { continue }
             
 
             // Establish absolute terminal printing coords

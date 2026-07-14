@@ -1,10 +1,16 @@
 # TO DO:
 ## Right now:
-- camera
-- adjust map drawing to use camera logic
-- camera follows cursor
 - trees
 
+## Features:
+- Trees
+- Creatures
+- cursor highlighting (needs to account for the offset of viewport bounds and tile bounds)
+- Work
+- Build
+- Hunt
+- Hunger
+- collision
 
 ## Map:
 - fixed map size types + declarations
@@ -12,17 +18,7 @@
 
 ## Colony:
 - create starting scenario rather than hardcoded colonists
-- names
-
-## Features:
-- Map
-- Trees
-- Creatures
-- Work
-- Build
-- Hunt
-- Hunger
-- collision
+- actor names
 
 ## Engine:
 - color
@@ -34,7 +30,6 @@
 - debug mode
 
 ## UI:
-- clamp cursor within canvas
 - create UI panel
     - nested panel?
 - console tab for showing debug info or running "console commands"

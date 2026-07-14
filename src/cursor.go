@@ -9,12 +9,13 @@ import (
 type Cursor struct {
     Sprite  Sprite
     X, Y    int
-    Panel   engine.Panel
+    Panel   *engine.Panel
+    Camera  *Camera
 }
 
 
 // Generate player cursor
-func NewCursor(p engine.Panel, x, y int) *Cursor {
+func NewCursor(p *engine.Panel, camera *Camera, x, y int) *Cursor {
     AbsX := p.X + x
     AbsY := p.Y + y
     char := sprite_cursor_x
@@ -24,6 +25,7 @@ func NewCursor(p engine.Panel, x, y int) *Cursor {
         X:      AbsX,
         Y:      AbsY,    
         Panel:  p,
+        Camera: camera,
     }
 }
 
@@ -41,8 +43,22 @@ func (c *Cursor) Move(dx, dy int) {
     c.Y = c.Y + dy
 
     // Clamp cursor in bounds
-    if c.X <= c.Panel.X {c.X = c.Panel.X + 1}
-    if c.Y <= c.Panel.Y {c.Y = c.Panel.Y + 1}
-    if c.X >= c.Panel.Width  { c.X = c.Panel.Width - 1 }
-    if c.Y >= c.Panel.Height { c.Y = c.Panel.Height - 1 }
+    if c.X <= c.Panel.X {
+        c.X = c.Panel.X + 1
+        c.Camera.X--
+    }
+
+    if c.Y <= c.Panel.Y {
+        c.Y = c.Panel.Y + 1
+        c.Camera.Y--
+    }
+
+    if c.X >= c.Panel.Width  {
+        c.X = c.Panel.Width - 1
+        c.Camera.X++
+        }
+    if c.Y >= c.Panel.Height {
+        c.Y = c.Panel.Height - 1 
+        c.Camera.Y++
+    }
 }

@@ -13,7 +13,7 @@ var r = engine.NewRenderer()
 const (
     SetFPS      = 30
     simIdleRate = 100
-    mapsize     = 50
+    mapsize     = 200
 )
 
 
@@ -36,8 +36,11 @@ func main() {
 
     panelCanvas.Style = engine.Light
 
+    // Camera
+    camera := Camera{X: 0, Y: 0}
+
     // New Cursor
-    cursor := NewCursor(panelCanvas, 1, 1)
+    cursor := NewCursor(&panelCanvas, &camera, 1, 1)
 
     // New World
     world := NewWorld()
@@ -79,8 +82,8 @@ func main() {
         // Draw
         r.Clear()                   // Clear Screen
         panelCanvas.DrawBorder(r)   // Panel Widget
-        tilemap.Draw(panelCanvas)   // Tilemap
-        s_Draw(&world.Components)   // Draw entities
+        tilemap.Draw(&panelCanvas, &camera)   // Tilemap
+        s_Draw(&world.Components, &panelCanvas, &camera)   // Draw entities
         cursor.Draw()               // Draw cursor
         // Temp
         /*
@@ -91,6 +94,10 @@ func main() {
         r.Move(10, 1)
         r.Text("Cursor Pos: (%d, %d)", cursor.X, cursor.Y)
         */
+        // more temp
+        r.Move(1,51)
+        r.Text("Camera: (%x,%d)", camera.X, camera.Y)
+
         // Flush all rendering
         r.Flush()
 
