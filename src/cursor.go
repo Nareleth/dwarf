@@ -1,19 +1,29 @@
 package main
 
+import (
+    "game/engine"
+)
+
 
 // Cursor struct
 type Cursor struct {
-    Char rune
-    X, Y int
+    Sprite  Sprite
+    X, Y    int
+    Panel   engine.Panel
 }
 
 
 // Generate player cursor
-func NewCursor(char rune, x, y int) *Cursor {
+func NewCursor(p engine.Panel, x, y int) *Cursor {
+    AbsX := p.X + x
+    AbsY := p.Y + y
+    char := sprite_cursor_x
+
     return &Cursor{
-        Char:   char, 
-        X:      x,
-        Y:      y,    
+        Sprite: char, 
+        X:      AbsX,
+        Y:      AbsY,    
+        Panel:  p,
     }
 }
 
@@ -21,7 +31,7 @@ func NewCursor(char rune, x, y int) *Cursor {
 // Draw player cursor
 func (c *Cursor) Draw() {
     r.Move(c.X, c.Y)
-    r.Text(string(c.Char))
+    r.Text(string(c.Sprite))
 }
 
 
@@ -31,7 +41,8 @@ func (c *Cursor) Move(dx, dy int) {
     c.Y = c.Y + dy
 
     // Clamp cursor in bounds
-    if c.X < 0 {c.X = 0}
-    if c.Y < 0 {c.Y = 0}
-    //outer bounds here!!!!!!!!!!!!!!!!!!!!!!
+    if c.X <= c.Panel.X {c.X = c.Panel.X + 1}
+    if c.Y <= c.Panel.Y {c.Y = c.Panel.Y + 1}
+    if c.X >= c.Panel.Width  { c.X = c.Panel.Width - 1 }
+    if c.Y >= c.Panel.Height { c.Y = c.Panel.Height - 1 }
 }

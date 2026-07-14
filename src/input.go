@@ -5,7 +5,7 @@ import (
 )
 
 // Goroutine to handle keypress
-func keyPress() {
+func keyPress(cursor *Cursor) {
     key := make([]byte, 1)
 
     for {

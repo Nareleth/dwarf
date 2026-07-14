@@ -9,9 +9,6 @@ import (
 // Declare global rendering
 var r = engine.NewRenderer()
 
-// DONT LET THIS BE GLOBAL!
-var cursor = NewCursor('X', 1, 1)
-
 // Declare const vars
 const (
     SetFPS      = 30
@@ -40,6 +37,7 @@ func main() {
     panelCanvas.Style = engine.Light
 
     // New Cursor
+    cursor := NewCursor(panelCanvas, 1, 1)
 
     // New World
     world := NewWorld()
@@ -52,7 +50,7 @@ func main() {
     world.SpawnColonist("Argo", 10, 5)
 
     // Goroutines
-    go keyPress()    
+    go keyPress(cursor)    
 
     // Game loop
     ticker := time.NewTicker(time.Second / time.Duration(SetFPS))

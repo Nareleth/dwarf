@@ -1,7 +1,5 @@
 # TO DO:
 ## Right now:
-- draw cursor from panel coords (draw)
-- clamp cursor to panel bounds (move)
 - camera
 - adjust map drawing to use camera logic
 - camera follows cursor
