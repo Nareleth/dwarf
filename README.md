@@ -1,14 +1,15 @@
 # TO DO:
 ## Right now:
-- fix stuttering
 - Creatures
 
 
 ## Features:
+- Creatures
 - cursor highlighting (needs to account for the offset of viewport bounds and tile bounds)
 - Work
 - Build
 - Hunt
+- map size
 - map generation algorithm
 - Hunger
 - collision

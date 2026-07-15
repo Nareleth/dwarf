@@ -24,6 +24,13 @@ type Camera struct {
     X, Y int
 }
 
+// Generic function to clamp objects within boundaries
+func clamp(val, min, max int) int {
+    if val < min { return min }
+    if val > max { return max}
+    return val
+}
+
 
 // Tilemap struct
 type TileMap struct {
@@ -64,8 +71,8 @@ func GenerateTileMap(world *World, width, height int) *TileMap {
 func (m *TileMap) Draw(p *engine.Panel, camera *Camera) {
     // Establish drawing area viewport
     // -- may not be necessary if i use drawcell func from engine
-    viewportWidth   := p.Width  -1
-    viewportHeight  := p.Height -1
+    viewportWidth   := p.Width  
+    viewportHeight  := p.Height
 
     // Iterate through the tilemap
     for y := range m.Height {
@@ -79,8 +86,8 @@ func (m *TileMap) Draw(p *engine.Panel, camera *Camera) {
             
 
             // Establish absolute terminal printing coords
-            ScreenX := p.X + 1 + viewportX
-            ScreenY := p.X + 1 + viewportY
+            ScreenX := p.X + viewportX
+            ScreenY := p.X + viewportY
 
             // Draw tile
             r.Move(ScreenX, ScreenY)

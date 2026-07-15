@@ -46,19 +46,35 @@ func (c *Cursor) Move(dx, dy int) {
     if c.X <= c.Panel.X {
         c.X = c.Panel.X + 1
         c.Camera.X--
+        
+        // Clamp camera in bounds
+        c.Camera.X = clamp(c.Camera.X, 0, mapsize - c.Panel.Width)
+        c.Camera.Y = clamp(c.Camera.Y, 0, mapsize - c.Panel.Height)
     }
 
     if c.Y <= c.Panel.Y {
         c.Y = c.Panel.Y + 1
         c.Camera.Y--
+        
+        // Clamp camera in bounds
+        c.Camera.X = clamp(c.Camera.X, 0, mapsize - c.Panel.Width)
+        c.Camera.Y = clamp(c.Camera.Y, 0, mapsize - c.Panel.Height)
     }
 
     if c.X >= c.Panel.Width  {
         c.X = c.Panel.Width - 1
         c.Camera.X++
+        
+        // Clamp camera in bounds
+        c.Camera.X = clamp(c.Camera.X, 0, mapsize - c.Panel.Width)
+        c.Camera.Y = clamp(c.Camera.Y, 0, mapsize - c.Panel.Height)
         }
     if c.Y >= c.Panel.Height {
         c.Y = c.Panel.Height - 1 
         c.Camera.Y++
+        
+        // Clamp camera in bounds
+        c.Camera.X = clamp(c.Camera.X, 0, mapsize - c.Panel.Width)
+        c.Camera.Y = clamp(c.Camera.Y, 0, mapsize - c.Panel.Height)
     }
 }

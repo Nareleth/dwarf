@@ -43,7 +43,7 @@ func main() {
     camera := Camera{X: 0, Y: 0}
 
     // New Cursor
-    cursor := NewCursor(&panelCanvas, &camera, 1, 1)
+    cursor := NewCursor(&panelCanvas, &camera, 2, 2)
 
     // New World
     world := NewWorld()
@@ -59,6 +59,8 @@ func main() {
     go keyPress(cursor)    
 
     // Render immutables
+    r.Clear()                   // Clear Screen
+    panelCanvas.DrawBorder(r)   // Panel Widget
     
 
     /* Game loop */
@@ -86,8 +88,6 @@ func main() {
         s_Move(&world.Components)   // Move entities
 
         // Draw
-        r.Clear()                   // Clear Screen
-        panelCanvas.DrawBorder(r)   // Panel Widget
         tilemap.Draw(&panelCanvas, &camera)   // Tilemap
         s_Draw(&world.Components, &panelCanvas, &camera)   // Draw entities
         cursor.Draw()               // Draw cursor

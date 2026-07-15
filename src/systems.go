@@ -34,8 +34,8 @@ func s_Draw(c *Components, p *engine.Panel, camera *Camera) {
             if localX <= 0 || localX >= p.Width || localY <= 0 || localY >= p.Height { continue }            
 
             
-            screenX := p.X + 1 + localX
-            screenY := p.Y + 1 + localY
+            screenX := p.X + localX
+            screenY := p.Y + localY
             r.Move(screenX, screenY)
             r.Text(string(sprite.Char))
 
