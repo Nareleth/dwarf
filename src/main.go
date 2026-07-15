@@ -54,6 +54,9 @@ func main() {
     // For testing
     world.SpawnColonist("Jeff", 10, 10)
     world.SpawnColonist("Argo", 10, 5)
+    world.SpawnSquirrel(11,11)
+    world.SpawnSquirrel(20,11)
+    world.SpawnSquirrel(11,20)
 
     // Goroutines
     go keyPress(cursor)    
@@ -88,27 +91,13 @@ func main() {
         s_Move(&world.Components)   // Move entities
 
         // Draw
-        tilemap.Draw(&panelCanvas, &camera)   // Tilemap
-        s_Draw(&world.Components, &panelCanvas, &camera)   // Draw entities
-        cursor.Draw()               // Draw cursor
-        // Temp
-        /*
-        r.Move(1, 0)
-        r.Text("Debug:")
-        r.Move(1, 1)
-        r.Text("FPS: %d", currentFPS)
-        r.Move(10, 1)
-        r.Text("Cursor Pos: (%d, %d)", cursor.X, cursor.Y)
-        */
-        // more temp
-        r.Move(1,51)
-        r.Text("Camera: (%x,%d)", camera.X, camera.Y)
+        tilemap.Draw(&panelCanvas, &camera)                 // Tilemap
+        s_Draw(&world.Components, &panelCanvas, &camera)    // Draw entities
+        cursor.Draw()                                       // Draw cursor
 
         // Flush all rendering
         r.Flush()
 
-        // Sleep
-        //time.Sleep(SetFPS * time.Millisecond) // Remove later
     }
 
 }

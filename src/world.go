@@ -49,3 +49,13 @@ func (w *World) SpawnTree(x, y int) {
     e.Sprite[id]    = &c_Sprite{ Char: sprite_tree }
     e.Position[id]  = &c_Position{ X: x, Y: y }
 }
+
+// Squirrel
+func (w *World) SpawnSquirrel(x, y int) {
+    id              := w.NewEntity()
+    e               := &w.Components
+    e.Name[id]      = &c_Name{ Value: "squirrel" }
+    e.Sprite[id]    = &c_Sprite{ Char: sprite_squirrel }
+    e.Position[id]  = &c_Position{ X: x, Y: y}
+    e.Velocity[id]  = &c_Velocity{ DX: 0, DY: 0} 
+}

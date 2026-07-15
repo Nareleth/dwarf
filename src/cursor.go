@@ -33,7 +33,6 @@ func NewCursor(p *engine.Panel, camera *Camera, x, y int) *Cursor {
 // Draw player cursor
 func (c *Cursor) Draw() {
     r.Move(c.X, c.Y)
-    //r.Text(string(c.Sprite))
     r.SetCell(c.X, c.Y, rune(c.Sprite))
 }
 

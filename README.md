@@ -1,9 +1,12 @@
 # TO DO:
 ## Right now:
-
+- UI Panel
+- hotkeys
+- ui state
+- colonist information
+- cursor hover
 
 ## Features:
-- Creatures
 - cursor highlighting (needs to account for the offset of viewport bounds and tile bounds)
 - Work
 - Build
