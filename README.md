@@ -1,6 +1,6 @@
 # TO DO:
 ## Right now:
-- Creatures
+- 2d buffering engine (fix stuttering)
 
 
 ## Features:
@@ -23,6 +23,11 @@
 - actor names
 
 ## Engine:
+- 2d buffering: (fixes stuttering)
+    - create a cell struct
+    - add two grids to renderer (front [][]Cell and back [][]Cell)
+    - all writing writes to back buffer filling in the cell (set cell func)
+    - create a flush function that iterates through the grid and only print whats new
 - color
 - get terminal size
 - move runes to its own file
@@ -38,7 +43,7 @@
 - tileset
 
 ## QOL:
-- fix stuttering
+- fix stuttering(requires engine modification)
 - create a gamestate for holding cursor info. so cursor can stop being global
 - also use that to change how the key input routine works
 
