@@ -1,14 +1,15 @@
 # TO DO:
 ## Right now:
-- trees
+- fix stuttering
+- Creatures
+
 
 ## Features:
-- Trees
-- Creatures
 - cursor highlighting (needs to account for the offset of viewport bounds and tile bounds)
 - Work
 - Build
 - Hunt
+- map generation algorithm
 - Hunger
 - collision
 
@@ -36,6 +37,7 @@
 - tileset
 
 ## QOL:
+- fix stuttering
 - create a gamestate for holding cursor info. so cursor can stop being global
 - also use that to change how the key input routine works
 

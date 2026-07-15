@@ -26,7 +26,7 @@ func NewComponents() Components {
 type c_Name struct { Value string }
 
 // Sprite
-type c_Sprite struct { Char rune }
+type c_Sprite struct { Char Sprite }
 
 // Position
 type c_Position struct { X, Y int }

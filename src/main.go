@@ -13,7 +13,10 @@ var r = engine.NewRenderer()
 const (
     SetFPS      = 30
     simIdleRate = 100
+
+    // Will update functionality later
     mapsize     = 200
+    seed uint64 = 12345
 )
 
 
@@ -46,7 +49,7 @@ func main() {
     world := NewWorld()
 
     // Generate tilemap
-    tilemap := GenerateTileMap(mapsize, mapsize)
+    tilemap := GenerateTileMap(world, mapsize, mapsize)
 
     // For testing
     world.SpawnColonist("Jeff", 10, 10)
@@ -55,7 +58,10 @@ func main() {
     // Goroutines
     go keyPress(cursor)    
 
-    // Game loop
+    // Render immutables
+    
+
+    /* Game loop */
     ticker := time.NewTicker(time.Second / time.Duration(SetFPS))
     defer ticker.Stop()
 

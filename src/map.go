@@ -1,6 +1,7 @@
 package main
 
 import (
+    "math/rand/v2"
     "game/engine"
 )
 
@@ -31,9 +32,13 @@ type TileMap struct {
 }
 
 // Generate a tilemap
-func GenerateTileMap(width, height int) *TileMap {
+func GenerateTileMap(world *World, width, height int) *TileMap {
     // Init empty map to fill
     tilemap := make([][]Tile, height)
+
+    // Init map seed
+    src := rand.NewPCG(seed, 0)
+    rng := rand.New(src)
 
     // Iterate through the rows
     for y := range tilemap {
@@ -43,6 +48,11 @@ func GenerateTileMap(width, height int) *TileMap {
         // Iterate through the columns
         for x := range tilemap[y] {
             tilemap[y][x] = Tile01
+
+            // RNG generate trees (5% chance)
+            if rng.IntN(100) < 5 {
+                world.SpawnTree(x, y)
+            }
         }
     }
 

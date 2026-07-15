@@ -31,11 +31,21 @@ func (w *World) NewEntity() EntityID {
 }
 
 /* Spawn functions - entity templates */
+// Colonist
 func (w *World) SpawnColonist(name string, x, y int) {
     id := w.NewEntity()
     c := &w.Components
     c.Name[id]      = &c_Name{ Value: name }
-    c.Sprite[id]    = &c_Sprite{ Char: '@' }
+    c.Sprite[id]    = &c_Sprite{ Char: sprite_colonist }
     c.Position[id]  = &c_Position{ X: x, Y: y }
     c.Velocity[id]  = &c_Velocity{ DX: 0, DY: 0 }
+}
+
+// Tree
+func (w *World) SpawnTree(x, y int) {
+    id              := w.NewEntity()
+    e               := &w.Components
+    e.Name[id]      = &c_Name{ Value: "tree" }
+    e.Sprite[id]    = &c_Sprite{ Char: sprite_tree }
+    e.Position[id]  = &c_Position{ X: x, Y: y }
 }
