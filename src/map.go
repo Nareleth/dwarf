@@ -91,7 +91,8 @@ func (m *TileMap) Draw(p *engine.Panel, camera *Camera) {
 
             // Draw tile
             r.Move(ScreenX, ScreenY)
-            r.Text(string(m.Tiles[y][x].Sprite))
+            //r.Text(string(m.Tiles[y][x].Sprite))
+            r.SetCell(x, y, rune(m.Tiles[y][x].Sprite))
         }
     }
 }

@@ -37,8 +37,8 @@ func s_Draw(c *Components, p *engine.Panel, camera *Camera) {
             screenX := p.X + localX
             screenY := p.Y + localY
             r.Move(screenX, screenY)
-            r.Text(string(sprite.Char))
-
+            //r.Text(string(sprite.Char))
+            r.SetCell(screenX, screenY, rune(sprite.Char))
         }
     }
 }

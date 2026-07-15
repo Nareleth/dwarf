@@ -10,16 +10,47 @@ import (
 
 /* Core */
 
+// Create a Cell that holds runes for printing
+type Cell struct {
+    Char    rune
+}
+
 // Render struct
+/*
+    The renderer type is the main centerpiece for rendering to the terminal.
+    Initiate the renderer once in the global scope using the NewRenderer function.
+    w represents a bufio writer for flushing text to screen.
+    The state is for toggling raw mode.
+    Front and back represent a 2d grid of cells (text) that are drawn on screen vs what will be drawn.
+*/
 type Renderer struct {
     w       *bufio.Writer
     state   *term.State
+    width   int
+    height  int
+    front   [][]Cell
+    back    [][]Cell
 }
 
 
 // Create a new Renderer
 func NewRenderer() *Renderer {
-    return &Renderer{w: bufio.NewWriter(os.Stdout)}
+    w, h, _ := term.GetSize(int(os.Stdout.Fd()))
+    front   := make([][]Cell, h)
+    back    := make([][]Cell, h)
+
+    for i := range front {
+        front[i]    = make([]Cell, w)
+        back[i]     = make([]Cell, w)
+    }
+
+    return &Renderer{
+        w:      bufio.NewWriter(os.Stdout), 
+        width:  w, 
+        height: h,
+        front:  front,
+        back:   back,
+        }
 }
 
 
@@ -66,9 +97,37 @@ func (r *Renderer) Move(x, y int) {
     fmt.Fprintf(r.w, "\033[%d;%dH", y+1, x+1)
 }
 
+// Get terminal dimensions
+func (r *Renderer) GetSize() (int, int) {
+    width, height, _ := term.GetSize(int(os.Stdout.Fd()))
+    return width, height
+}
+
+// Write to the back buffer
+func (r *Renderer) SetCell(x, y int, char rune) {
+    r.back[y][x] = Cell{ Char: char }
+}
+
 
 // Flush buffer and print
 func (r *Renderer) Flush() {
+    for y := range r.height {
+        for x := range r.width {
+            if r.back[y][x] != r.front[y][x] {
+                r.Move(x, y)
+                r.Text(string(r.back[y][x].Char))
+                r.front[y][x] = r.back[y][x]
+            }
+        }
+    }
+
+    // Clear back buffer
+    for y := range r.back {
+        for x := range r.back[y] {
+            r.back[y][x] = Cell{}
+        }
+    }
+
     r.w.Flush()
 }
 
