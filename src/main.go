@@ -52,7 +52,7 @@ func main() {
     camera := Camera{X: 0, Y: 0}
 
     // New Cursor
-    cursor := NewCursor(&panelCanvas, &camera, 2, 2)
+    cursor := NewCursor(&panelCanvas, &camera, 1, 1)
 
     // New World
     world := NewWorld()
@@ -99,6 +99,8 @@ func main() {
         // Update
         s_Idle(&world.Components)   // Idle Sim
         s_Move(&world.Components)   // Move entities
+        ui_selected.Set(cursor.Hover(world))
+        
 
         // Draw
         UI_Draw(&panelUI)

@@ -30,6 +30,19 @@ func (w *World) NewEntity() EntityID {
     return id
 }
 
+// Get the entity from a location
+func (w *World) GetEntityAt(X, Y int) (EntityID, bool) {
+    for id, pos := range w.Components.Position {
+        if pos.X == X && pos.Y == Y {
+            return id, true
+        }
+    }
+
+    r.Move(1,53)
+    r.Text("Nothing found at (%d, %d)", X, Y)
+    return 0, false
+}
+
 /* Spawn functions - entity templates */
 // Colonist
 func (w *World) SpawnColonist(name string, x, y int) {

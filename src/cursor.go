@@ -80,4 +80,18 @@ func (c *Cursor) Move(dx, dy int) {
 }
 
 // Get name of hovered entity and show actions
+func (c *Cursor) Hover(w *World) string {
+    // Convert cursor coords to world coords
+    mapX := c.X - c.Panel.X + c.Camera.X
+    mapY := c.Y - c.Panel.Y + c.Camera.Y
 
+    // Get hovered entity data
+    id, hovered := w.GetEntityAt(mapX, mapY)
+    if !hovered {
+        return ""
+    }
+    if name, ok := w.Components.Name[id]; ok {
+        return name.Value
+    }
+    return ""
+}

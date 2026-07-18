@@ -1,10 +1,14 @@
 # TO DO:
 ## Right now:
+- make a settext func similar to set cell so we can clear text for the ui
+- cursor hover
+    - Clear old text
 - UI Panel
+
+## backlog
 - hotkeys
 - ui state
 - colonist information
-- cursor hover
 
 ## Features:
 - cursor highlighting (needs to account for the offset of viewport bounds and tile bounds)
@@ -42,6 +46,7 @@
 ## QOL:
 - create a gamestate for holding cursor info. so cursor can stop being global
 - also use that to change how the key input routine works
+- clean up the Ui code. a lot of it can be used in gameengine
 
 ## Cleanup:
 - proably need to make a gamestate to track cursor and ui shit in the future
