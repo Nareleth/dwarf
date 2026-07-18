@@ -141,11 +141,11 @@ type Panel struct {
 }
 
 // Draw cell content
-func (p *Panel) DrawCell(r *Renderer, childX, childY int, text string) {
+func (p *Panel) DrawCell(r *Renderer, childX, childY int, text string, args ...any) {
     absX := p.X + childX
     absY := p.Y + childY
     r.Move(absX, absY)
-    r.Text(text)
+    r.Text(text, args...)
 }
 
 // Draw panel borders

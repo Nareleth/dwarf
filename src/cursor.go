@@ -78,3 +78,6 @@ func (c *Cursor) Move(dx, dy int) {
         c.Camera.Y = clamp(c.Camera.Y, 0, mapsize - c.Panel.Height)
     }
 }
+
+// Get name of hovered entity and show actions
+

@@ -39,6 +39,15 @@ func main() {
 
     panelCanvas.Style = engine.Light
 
+    panelUI     := engine.Panel{
+        X:      panelCanvas.X + panelCanvas.Width + 1,
+        Y:      panelCanvas.Y,
+        Width:  30,
+        Height: panelCanvas.Height,
+    }
+
+    panelUI.Style = engine.Light
+
     // Camera
     camera := Camera{X: 0, Y: 0}
 
@@ -63,7 +72,8 @@ func main() {
 
     // Render immutables
     r.Clear()                   // Clear Screen
-    panelCanvas.DrawBorder(r)   // Panel Widget
+    panelCanvas.DrawBorder(r)   // Panel Widget Game
+    panelUI.DrawBorder(r)       // Panel Widget UI
     
 
     /* Game loop */
@@ -91,6 +101,7 @@ func main() {
         s_Move(&world.Components)   // Move entities
 
         // Draw
+        UI_Draw(&panelUI)
         tilemap.Draw(&panelCanvas, &camera)                 // Tilemap
         s_Draw(&world.Components, &panelCanvas, &camera)    // Draw entities
         cursor.Draw()                                       // Draw cursor
