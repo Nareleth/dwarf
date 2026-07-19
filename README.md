@@ -1,9 +1,10 @@
 # TO DO:
 ## Right now:
-- rework DrawCell (what im using in UI) into a SetText func so we can clear text like setcell
-- cursor hover
-    - Clear old text
-- UI Panel
+- hotkeys
+- work actions
+- work queue
+- despawn entity
+- colony resources
 
 ## backlog
 - hotkeys
@@ -11,8 +12,8 @@
 - colonist information
 
 ## Features:
-- cursor highlighting (needs to account for the offset of viewport bounds and tile bounds)
 - Work
+- resources
 - Build
 - Hunt
 - map size

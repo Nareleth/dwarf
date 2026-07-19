@@ -171,21 +171,17 @@ func (p *Panel) DrawBorder(r *Renderer) {
     // Draw the x axis (row)
     for row := p.X; row <= length; row++ {
         // Draw the top row
-        r.Move(row, p.Y)
-
         switch row {
-        case p.X:       r.Text(string(br.RuneBoxNW))
-        case length:    r.Text(string(br.RuneBoxNE))
-        default:        r.Text(string(br.RuneBoxRow))
+        case p.X:       r.SetCell(row, p.Y, br.RuneBoxNW)
+        case length:    r.SetCell(row, p.Y, br.RuneBoxNE)
+        default:        r.SetCell(row, p.Y, br.RuneBoxRow)
         }
 
         // Draw the bottom row
-        r.Move(row, size)
-
         switch row {
-        case p.X:       r.Text(string(br.RuneBoxSW))
-        case length:    r.Text(string(br.RuneBoxSE))
-        default:        r.Text(string(br.RuneBoxRow))
+        case p.X:       r.SetCell(row, size, br.RuneBoxSW)
+        case length:    r.SetCell(row, size, br.RuneBoxSE)
+        default:        r.SetCell(row, size, br.RuneBoxRow)
         }
 
     }
@@ -193,21 +189,17 @@ func (p *Panel) DrawBorder(r *Renderer) {
     // Draw the y axis (col)
     for col := p.Y; col <= size; col++ {
         // Draw the left col
-        r.Move(p.X, col)
-
         switch col {
-        case p.Y:   r.Text(string(br.RuneBoxNW))
-        case size:  r.Text(string(br.RuneBoxSW))
-        default:    r.Text(string(br.RuneBoxCol))
+        case p.Y:   r.SetCell(p.X, col, br.RuneBoxNW)
+        case size:  r.SetCell(p.X, col, br.RuneBoxSW)
+        default:    r.SetCell(p.X, col, br.RuneBoxCol)
         }
 
         // Draw the right col
-        r.Move(length, col)
-
         switch col {
-        case p.Y:   r.Text(string(br.RuneBoxNE))
-        case size:  r.Text(string(br.RuneBoxSE))
-        default:    r.Text(string(br.RuneBoxCol))
+        case p.Y:   r.SetCell(length, col, br.RuneBoxNE)
+        case size:  r.SetCell(length, col, br.RuneBoxSE)
+        default:    r.SetCell(length, col, br.RuneBoxCol)
         }
     }
     

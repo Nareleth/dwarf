@@ -73,11 +73,11 @@ func main() {
     // Goroutines
     go keyPress(cursor)    
 
-    // Render immutables
-    r.Clear()                   // Clear Screen
-    panelCanvas.DrawBorder(r)   // Panel Widget Game
-    panelUI.DrawBorder(r)       // Panel Widget UI
-    ui.Init()                   // Init the UI
+    // Clear screen
+    r.Clear()
+
+    // Init UI
+    ui.Init()
     
 
     /* Game loop */
@@ -107,6 +107,8 @@ func main() {
         
 
         // Draw
+        panelCanvas.DrawBorder(r)                           // Panel Widget Game
+        panelUI.DrawBorder(r)                               // Panel Widget UI
         ui.Draw()                                           // UI
         tilemap.Draw(&panelCanvas, &camera)                 // Tilemap
         s_Draw(&world.Components, &panelCanvas, &camera)    // Draw entities
