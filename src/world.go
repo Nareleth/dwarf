@@ -38,8 +38,6 @@ func (w *World) GetEntityAt(X, Y int) (EntityID, bool) {
         }
     }
 
-    r.Move(1,53)
-    r.Text("Nothing found at (%d, %d)", X, Y)
     return 0, false
 }
 

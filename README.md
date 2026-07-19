@@ -1,6 +1,6 @@
 # TO DO:
 ## Right now:
-- make a settext func similar to set cell so we can clear text for the ui
+- rework DrawCell (what im using in UI) into a SetText func so we can clear text like setcell
 - cursor hover
     - Clear old text
 - UI Panel

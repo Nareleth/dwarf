@@ -48,6 +48,9 @@ func main() {
 
     panelUI.Style = engine.Light
 
+    // UI Engine
+    ui := NewUIEngine(&panelUI)
+
     // Camera
     camera := Camera{X: 0, Y: 0}
 
@@ -74,6 +77,7 @@ func main() {
     r.Clear()                   // Clear Screen
     panelCanvas.DrawBorder(r)   // Panel Widget Game
     panelUI.DrawBorder(r)       // Panel Widget UI
+    ui.Init()                   // Init the UI
     
 
     /* Game loop */
@@ -99,11 +103,11 @@ func main() {
         // Update
         s_Idle(&world.Components)   // Idle Sim
         s_Move(&world.Components)   // Move entities
-        ui_selected.Set(cursor.Hover(world))
+        ui.Elements[0].Set(cursor.Hover(world))
         
 
         // Draw
-        UI_Draw(&panelUI)
+        ui.Draw()                                           // UI
         tilemap.Draw(&panelCanvas, &camera)                 // Tilemap
         s_Draw(&world.Components, &panelCanvas, &camera)    // Draw entities
         cursor.Draw()                                       // Draw cursor

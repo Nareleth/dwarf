@@ -4,33 +4,64 @@ import (
     "game/engine"
 )
 
-var (
-    ui_selected = &Element{}
-)
-
+// Elements will go in the engine, so they are built around that purpose.
 
 // Create UI Elements that dynamically change.
 type Element struct {
-    Value string
+    Label   string
+    Value   string
+    X, Y    int
 }
 
-// Set Element Text
+// Generate new elements
+func NewElement(label, value string, x, y int) *Element {
+    return &Element{
+        Label:  label,
+        Value:  value,
+        X:      x,
+        Y:      y,
+    }
+}
+
+// Set Element Value
 func (e *Element) Set(v string) {
     e.Value = v
 }
 
-// Get Element Text
+// Get Element Value
 func (e *Element) Get() string {
     return e.Value
 }
 
-// Create a UI Label that is statically set
-func AddLabel(p *engine.Panel, X, Y int, label string, value string) {
-    p.DrawCell(r, X, Y, label, value)
+// Create a wrapper for tracking the UI elements. Game logic talks here and UI logic reads here
+type UIEngine struct {
+    Elements    []*Element
+    Panel       *engine.Panel
 }
 
-// Wrapper for all UI drawing functions
-func UI_Draw(p *engine.Panel) {
-    AddLabel(p, 1, 1, "Selected: %s", ui_selected.Get())
+// Construct a new UIEngine
+func NewUIEngine(panel *engine.Panel) *UIEngine {
+    return &UIEngine {
+        Elements:   make([]*Element, 0),
+        Panel:      panel,
+    }
 }
 
+// Create a new Element using this wrapper and draw it on screen.
+func (ui *UIEngine) AddElement(label, value string, x, y int) {
+    ui.Elements = append(ui.Elements, NewElement(label, value, x, y))
+    
+    ui.Panel.DrawCell(r, x, y, label+value)
+}
+
+// Initialize all UI Elements
+func (ui *UIEngine) Init() {
+    ui.AddElement("Selected: ", "nil", 1, 1)
+}
+
+// Draws all UI elements
+func (ui *UIEngine) Draw() {
+    for _, e := range ui.Elements{
+        ui.Panel.DrawCell(r, e.X, e.Y, e.Label+e.Value)
+    }
+}
