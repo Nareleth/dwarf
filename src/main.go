@@ -101,9 +101,9 @@ func main() {
         _ = currentFPS
 
         // Update
-        s_Idle(&world.Components)   // Idle Sim
-        s_Move(&world.Components)   // Move entities
-        ui.Elements[0].Set(cursor.Hover(world))
+        s_Idle(&world.Components)               // Idle Sim
+        s_Move(&world.Components)               // Move entities
+        ui.Elements[0].Set(cursor.Hover(world)) // Cursor Hover
         
 
         // Draw

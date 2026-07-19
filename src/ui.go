@@ -51,17 +51,21 @@ func NewUIEngine(panel *engine.Panel) *UIEngine {
 func (ui *UIEngine) AddElement(label, value string, x, y int) {
     ui.Elements = append(ui.Elements, NewElement(label, value, x, y))
     
-    ui.Panel.DrawCell(r, x, y, label+value)
-}
-
-// Initialize all UI Elements
-func (ui *UIEngine) Init() {
-    ui.AddElement("Selected: ", "nil", 1, 1)
+    //ui.Panel.DrawCell(r, x, y, label+value)
+    ui.Panel.SetText(r, x, y, label+value)
 }
 
 // Draws all UI elements
 func (ui *UIEngine) Draw() {
     for _, e := range ui.Elements{
-        ui.Panel.DrawCell(r, e.X, e.Y, e.Label+e.Value)
+        //ui.Panel.DrawCell(r, e.X, e.Y, e.Label+e.Value)
+        ui.Panel.SetText(r, e.X, e.Y, e.Label+e.Value)
     }
+}
+
+
+/* Create the UI Elements */
+// Initialize all UI Elements and draws them on the screen for the first time.
+func (ui *UIEngine) Init() {
+    ui.AddElement("Selected: ", "nil", 1, 1)
 }

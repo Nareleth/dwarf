@@ -103,7 +103,7 @@ func (r *Renderer) GetSize() (int, int) {
     return width, height
 }
 
-// Write to the back buffer
+// Write a cells contents and allow back buffer flushing
 func (r *Renderer) SetCell(x, y int, char rune) {
     r.back[y][x] = Cell{ Char: char }
 }
@@ -124,7 +124,8 @@ func (r *Renderer) Flush() {
     // Clear back buffer
     for y := range r.back {
         for x := range r.back[y] {
-            r.back[y][x] = Cell{}
+            //r.back[y][x] = Cell{}
+            r.back[y][x] = Cell{Char: ' '}
         }
     }
 
@@ -146,6 +147,15 @@ func (p *Panel) DrawCell(r *Renderer, childX, childY int, text string, args ...a
     absY := p.Y + childY
     r.Move(absX, absY)
     r.Text(text, args...)
+}
+
+// Draw cell Text and allow back buffer flushing
+func (p *Panel) SetText(r *Renderer, childX, childY int, text string){
+    absX := p.X + childX
+    absY := p.Y + childY
+    for i, char := range text {
+        r.SetCell(absX+i, absY, char)
+    }
 }
 
 // Draw panel borders
