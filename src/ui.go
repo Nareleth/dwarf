@@ -68,4 +68,5 @@ func (ui *UIEngine) Draw() {
 // Initialize all UI Elements and draws them on the screen for the first time.
 func (ui *UIEngine) Init() {
     ui.AddElement("Selected: ", "nil", 1, 1)
+    ui.AddElement("Actions:", "", 1, 2)
 }
