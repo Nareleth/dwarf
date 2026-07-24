@@ -3,6 +3,10 @@ package main
 
 /*
 Commands are used to issue orders to entities
+- The command ID is a direct reference to a command to be used.
+- CommandEvents are pushed to a system channel so that an entity will perform the command.
+- CommandDef is what the UI uses to display commands to the player.
+- Init Commands initializes the list of all commands at game start.
 */
 
 // CommandID creates a reference to commands to be used by systems.

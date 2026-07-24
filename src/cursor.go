@@ -80,7 +80,7 @@ func (c *Cursor) Move(dx, dy int) {
 }
 
 // Get name of hovered entity and show actions
-func (c *Cursor) Hover(w *World) string {
+func (c *Cursor) Hover(w *World, gs *GameState) (string, []string)  {
     // Convert cursor coords to world coords
     mapX := c.X - c.Panel.X + c.Camera.X
     mapY := c.Y - c.Panel.Y + c.Camera.Y
@@ -88,10 +88,24 @@ func (c *Cursor) Hover(w *World) string {
     // Get hovered entity data
     id, hovered := w.GetEntityAt(mapX, mapY)
     if !hovered {
-        return ""
+        return "", nil
     }
+
+    // Get entity name
+    e_name := ""
     if name, ok := w.Components.Name[id]; ok {
-        return name.Value
+        e_name = name.Value
     }
-    return ""
+
+    // Get interactable data
+    var e_actions []string
+    if interactable, ok := w.Components.Interactable[id]; ok {
+        for _, cmdID := range interactable.Commands {
+            if def, ok := gs.Commands[cmdID]; ok {
+                e_actions = append(e_actions, def.Label)
+            }
+        }
+    }
+
+    return e_name, e_actions
 }

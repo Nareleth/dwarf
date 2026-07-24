@@ -54,11 +54,12 @@ func (w *World) SpawnColonist(name string, x, y int) {
 
 // Tree
 func (w *World) SpawnTree(x, y int) {
-    id              := w.NewEntity()
-    e               := &w.Components
-    e.Name[id]      = &c_Name{ Value: "tree" }
-    e.Sprite[id]    = &c_Sprite{ Char: sprite_tree }
-    e.Position[id]  = &c_Position{ X: x, Y: y }
+    id                  := w.NewEntity()
+    e                   := &w.Components
+    e.Name[id]          = &c_Name{ Value: "tree" }
+    e.Sprite[id]        = &c_Sprite{ Char: sprite_tree }
+    e.Position[id]      = &c_Position{ X: x, Y: y }
+    e.Interactable[id]  = &c_Interactable{ Commands: []CommandID{"cmd_chop"}}
 }
 
 // Squirrel

@@ -20,6 +20,19 @@ const (
 )
 
 
+// GameState that tracks game logic
+type GameState struct {
+    Commands map[CommandID]CommandDef
+}
+
+// Initialize the game state
+func NewGameState() *GameState {
+    return &GameState{
+        Commands: InitCommands(),
+    }
+}
+
+
 func main() {
     // Raw Mode (for input)
     r.EnableRawMode()
@@ -63,6 +76,9 @@ func main() {
     // Generate tilemap
     tilemap := GenerateTileMap(world, mapsize, mapsize)
 
+    // Initialize Gamestate
+    gs := NewGameState()
+
     // For testing
     world.SpawnColonist("Jeff", 10, 10)
     world.SpawnColonist("Argo", 10, 5)
@@ -101,9 +117,11 @@ func main() {
         _ = currentFPS
 
         // Update
-        s_Idle(&world.Components)               // Idle Sim
-        s_Move(&world.Components)               // Move entities
-        ui.Elements[0].Set(cursor.Hover(world)) // Cursor Hover
+        s_Idle(&world.Components)                       // Idle Sim
+        s_Move(&world.Components)                       // Move entities
+        //e_name, e_actions := cursor.Hover(world, gs)    // Cursor Hover
+        e_name, _ := cursor.Hover(world, gs)    // Cursor Hover
+        ui.Elements[0].Set(e_name)                      // UI Selected
         
 
         // Draw
