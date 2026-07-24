@@ -1,9 +1,7 @@
 # TO DO:
 ## Right now:
 - Commands:
-    - Add chop as in interaction to tree entities
-    - wire the UI to list tree interactions on hover
-    - Create the hotkey interaction (can only run when hovered
+    - Create the hotkey interaction (can only run when hovered) (will also need to reference world and gamestate in teh keypress func...)
     - Create the system channel to listen for input
 - Work System
     - create entity state component (so they arent only idling)
@@ -52,9 +50,11 @@
 - tileset
 
 ## QOL:
+- clean up the ui updating section in main
 - create a gamestate for holding cursor info. so cursor can stop being global
 - also use that to change how the key input routine works
 - clean up the Ui code. a lot of it can be used in gameengine
+- create a "text section" thing in the engine so cursor hover actions can go there
 
 ## backlog
 - ui state

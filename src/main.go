@@ -119,9 +119,14 @@ func main() {
         // Update
         s_Idle(&world.Components)                       // Idle Sim
         s_Move(&world.Components)                       // Move entities
-        //e_name, e_actions := cursor.Hover(world, gs)    // Cursor Hover
-        e_name, _ := cursor.Hover(world, gs)    // Cursor Hover
+        // should make this prettier one day
+        e_name, e_actions := cursor.Hover(world, gs)    // Cursor Hover
         ui.Elements[0].Set(e_name)                      // UI Selected
+        if len(e_actions) > 0 {
+            ui.Elements[1].Set(" " + e_actions[0])
+        } else {
+            ui.Elements[1].Set("")
+        }
         
 
         // Draw
